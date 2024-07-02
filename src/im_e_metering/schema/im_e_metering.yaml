@@ -1,6 +1,7 @@
 name: MeteringProfile
 title: Metering Vocabulary
 id: http://data.netbeheernederland.nl/im-e-metering/version#1.0.0
+description: This vocabulary describes the metering profile from NBNLES.
 imports:
 - linkml:types
 prefixes:
