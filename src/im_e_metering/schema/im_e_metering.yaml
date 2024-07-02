@@ -1,96 +1,906 @@
----
-id: https://w3id.org/Netbeheer-Nederland/im-e-metering
-name: im-e-metering
-title: im-e-metering
-description: |-
-  Informatiemodel voor het NBNLES Metering Profile.
-license: Apache Software License 2.0
-see_also:
-  - https://Netbeheer-Nederland.github.io/im-e-metering
-
-prefixes:
-  im_e_metering: https://w3id.org/Netbeheer-Nederland/im-e-metering/
-  linkml: https://w3id.org/linkml/
-  biolink: https://w3id.org/biolink/
-  schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
-  example: https://example.org/
-default_prefix: im_e_metering
-default_range: string
-
+name: MeteringProfile
+title: Metering Vocabulary
+id: http://data.netbeheernederland.nl/im-e-metering/version#1.0.0
 imports:
-  - linkml:types
-
-classes:
-
-  NamedThing:
-    description: >-
-      A generic grouping for any identifiable entity
-    slots:
-      - id
-      - name
-      - description
-    class_uri: schema:Thing
-
-  IdentifiedObject:
-    is_a: NamedThing
-    description: >-
-      Represents a IdentifiedObject
-    slots:
-      - primary_email
-      - birth_date
-      - age_in_years
-      - vital_status
-    slot_usage:
-      primary_email:
-        pattern: "^\\S+@[\\S+\\.]+\\S+"
-
-  IdentifiedObjectCollection:
-    tree_root: true
-    description: >-
-      A holder for IdentifiedObject objects
-    attributes:
-      entries:
-        range: IdentifiedObject
-        multivalued: true
-        inlined: true
-
-slots:
-  id:
-    identifier: true
-    slot_uri: schema:identifier
-    range: uriorcurie
-    description: A unique identifier for a thing
-  name:
-    slot_uri: schema:name
-    description: A human-readable name for a thing
-  description:
-    slot_uri: schema:description
-    description: A human-readable description for a thing
-  primary_email:
-    slot_uri: schema:email
-    description: The main email address of a person
-  birth_date:
-    slot_uri: schema:birthDate
-    range: date
-    description: Date on which a person is born
-  age_in_years:
-    range: integer
-    description: Number of years since birth
-  vital_status:
-    range: PersonStatus
-    description: living or dead status
-
+- linkml:types
+prefixes:
+  linkml: https://w3id.org/linkml/
+  github: https://github.com/
+  cim: https://cim.ucaiug.io/ns#
+  eu: http://iec.ch/TC57/CIM100-European#
+  this: http://data.netbeheernederland.nl/im-e-metering/def#
+default_curi_maps:
+- semweb_context
+default_prefix: this
+default_range: string
 enums:
-  PersonStatus:
+  AmiBillingReadyKind:
+    description: "Lifecycle states of the metering installation at a usage point with\
+      \ respect to readiness for billing via advanced metering infrastructure reads.\r\
+      \n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:AmiBillingReadyKind
     permissible_values:
-      ALIVE:
-        description: the person is living
-        meaning: PATO:0001421
-      DEAD:
-        description: the person is deceased
-        meaning: PATO:0001422
-      UNKNOWN:
-        description: the vital status is not known
-        todos:
-          - map this to an ontology
+      amiCapable:
+        meaning: cim:AmiBillingReadyKind.amiCapable
+      amiDisabled:
+        meaning: cim:AmiBillingReadyKind.amiDisabled
+      billingApproved:
+        meaning: cim:AmiBillingReadyKind.billingApproved
+      enabled:
+        meaning: cim:AmiBillingReadyKind.enabled
+      nonAmi:
+        meaning: cim:AmiBillingReadyKind.nonAmi
+      nonMetered:
+        meaning: cim:AmiBillingReadyKind.nonMetered
+      operable:
+        meaning: cim:AmiBillingReadyKind.operable
+  UsagePointConnectedKind:
+    description: "State of the usage point with respect to connection to the network.\r\
+      \n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:UsagePointConnectedKind
+    permissible_values:
+      connected:
+        meaning: cim:UsagePointConnectedKind.connected
+      logicallyDisconnected:
+        meaning: cim:UsagePointConnectedKind.logicallyDisconnected
+      physicallyDisconnected:
+        meaning: cim:UsagePointConnectedKind.physicallyDisconnected
+  UnitMultiplier:
+    description: "The unit multipliers defined for the CIM.  When applied to unit\
+      \ symbols, the unit symbol is treated as a derived unit. Regardless of the contents\
+      \ of the unit symbol text, the unit symbol shall be treated as if it were a\
+      \ single-character unit symbol. Unit symbols should not contain multipliers,\
+      \ and it should be left to the multiplier to define the multiple for an entire\
+      \ data type. \r\n\r\nFor example, if a unit symbol is \"m2Pers\" and the multiplier\
+      \ is \"k\", then the value is k(m**2/s), and the multiplier applies to the entire\
+      \ final value, not to any individual part of the value. This can be conceptualized\
+      \ by substituting a derived unit symbol for the unit type. If one imagines that\
+      \ the symbol \"\xDE\" represents the derived unit \"m2Pers\", then applying\
+      \ the multiplier \"k\" can be conceptualized simply as \"k\xDE\".\r\n\r\nFor\
+      \ example, the SI unit for mass is \"kg\" and not \"g\".  If the unit symbol\
+      \ is defined as \"kg\", then the multiplier is applied to \"kg\" as a whole\
+      \ and does not replace the \"k\" in front of the \"g\". In this case, the multiplier\
+      \ of \"m\" would be used with the unit symbol of \"kg\" to represent one gram.\
+      \  As a text string, this violates the instructions in IEC 80000-1. However,\
+      \ because the unit symbol in CIM is treated as a derived unit instead of as\
+      \ an SI unit, it makes more sense to conceptualize the \"kg\" as if it were\
+      \ replaced by one of the proposed replacements for the SI mass symbol. If one\
+      \ imagines that the \"kg\" were replaced by a symbol \"\xDE\", then it is easier\
+      \ to conceptualize the multiplier \"m\" as creating the proper unit \"m\xDE\"\
+      , and not the forbidden unit \"mkg\"."
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:UnitMultiplier
+    permissible_values:
+      a:
+        meaning: cim:UnitMultiplier.a
+      c:
+        meaning: cim:UnitMultiplier.c
+      d:
+        meaning: cim:UnitMultiplier.d
+      da:
+        meaning: cim:UnitMultiplier.da
+      E:
+        meaning: cim:UnitMultiplier.E
+      f:
+        meaning: cim:UnitMultiplier.f
+      G:
+        meaning: cim:UnitMultiplier.G
+      h:
+        meaning: cim:UnitMultiplier.h
+      k:
+        meaning: cim:UnitMultiplier.k
+      m:
+        meaning: cim:UnitMultiplier.m
+      M:
+        meaning: cim:UnitMultiplier.M
+      micro:
+        meaning: cim:UnitMultiplier.micro
+      n:
+        meaning: cim:UnitMultiplier.n
+      none:
+        meaning: cim:UnitMultiplier.none
+      p:
+        meaning: cim:UnitMultiplier.p
+      P:
+        meaning: cim:UnitMultiplier.P
+      T:
+        meaning: cim:UnitMultiplier.T
+      y:
+        meaning: cim:UnitMultiplier.y
+      Y:
+        meaning: cim:UnitMultiplier.Y
+      z:
+        meaning: cim:UnitMultiplier.z
+      Z:
+        meaning: cim:UnitMultiplier.Z
+  UnitSymbol:
+    description: "The derived units defined for usage in the CIM. In some cases, the\
+      \ derived unit is equal to an SI unit. Whenever possible, the standard derived\
+      \ symbol is used instead of the formula for the derived unit. For example, the\
+      \ unit symbol Farad is defined as \"F\" instead of \"CPerV\". In cases where\
+      \ a standard symbol does not exist for a derived unit, the formula for the unit\
+      \ is used as the unit symbol. For example, density does not have a standard\
+      \ symbol and so it is represented as \"kgPerm3\". With the exception of the\
+      \ \"kg\", which is an SI unit, the unit symbols do not contain multipliers and\
+      \ therefore represent the base derived unit to which a multiplier can be applied\
+      \ as a whole. \r\nEvery unit symbol is treated as an unparseable text as if\
+      \ it were a single-letter symbol. The meaning of each unit symbol is defined\
+      \ by the accompanying descriptive text and not by the text contents of the unit\
+      \ symbol.\r\nTo allow the widest possible range of serializations without requiring\
+      \ special character handling, several substitutions are made which deviate from\
+      \ the format described in IEC 80000-1. The division symbol \"/\" is replaced\
+      \ by the letters \"Per\". Exponents are written in plain text after the unit\
+      \ as \"m3\" instead of being formatted as \"m\" with a superscript of 3  or\
+      \ introducing a symbol as in \"m^3\". The degree symbol \"\xB0\" is replaced\
+      \ with the letters \"deg\". Any clarification of the meaning for a substitution\
+      \ is included in the description for the unit symbol.\r\nNon-SI units are included\
+      \ in list of unit symbols to allow sources of data to be correctly labelled\
+      \ with their non-SI units (for example, a GPS sensor that is reporting numbers\
+      \ that represent feet instead of meters). This allows software to use the unit\
+      \ symbol information correctly convert and scale the raw data of those sources\
+      \ into SI-based units. \r\nThe integer values are used for harmonization with\
+      \ IEC 61850."
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:UnitSymbol
+    permissible_values:
+      A:
+        meaning: cim:UnitSymbol.A
+      A2:
+        meaning: cim:UnitSymbol.A2
+      A2h:
+        meaning: cim:UnitSymbol.A2h
+      A2s:
+        meaning: cim:UnitSymbol.A2s
+      Ah:
+        meaning: cim:UnitSymbol.Ah
+      anglemin:
+        meaning: cim:UnitSymbol.anglemin
+      anglesec:
+        meaning: cim:UnitSymbol.anglesec
+      APerA:
+        meaning: cim:UnitSymbol.APerA
+      APerm:
+        meaning: cim:UnitSymbol.APerm
+      As:
+        meaning: cim:UnitSymbol.As
+      bar:
+        meaning: cim:UnitSymbol.bar
+      Bq:
+        meaning: cim:UnitSymbol.Bq
+      Btu:
+        meaning: cim:UnitSymbol.Btu
+      C:
+        meaning: cim:UnitSymbol.C
+      cd:
+        meaning: cim:UnitSymbol.cd
+      character:
+        meaning: cim:UnitSymbol.character
+      charPers:
+        meaning: cim:UnitSymbol.charPers
+      cosPhi:
+        meaning: cim:UnitSymbol.cosPhi
+      count:
+        meaning: cim:UnitSymbol.count
+      CPerkg:
+        meaning: cim:UnitSymbol.CPerkg
+      CPerm2:
+        meaning: cim:UnitSymbol.CPerm2
+      CPerm3:
+        meaning: cim:UnitSymbol.CPerm3
+      d:
+        meaning: cim:UnitSymbol.d
+      dB:
+        meaning: cim:UnitSymbol.dB
+      dBm:
+        meaning: cim:UnitSymbol.dBm
+      deg:
+        meaning: cim:UnitSymbol.deg
+      degC:
+        meaning: cim:UnitSymbol.degC
+      F:
+        meaning: cim:UnitSymbol.F
+      FPerm:
+        meaning: cim:UnitSymbol.FPerm
+      ft3:
+        meaning: cim:UnitSymbol.ft3
+      G:
+        meaning: cim:UnitSymbol.G
+      gal:
+        meaning: cim:UnitSymbol.gal
+      gPerg:
+        meaning: cim:UnitSymbol.gPerg
+      Gy:
+        meaning: cim:UnitSymbol.Gy
+      GyPers:
+        meaning: cim:UnitSymbol.GyPers
+      H:
+        meaning: cim:UnitSymbol.H
+      h:
+        meaning: cim:UnitSymbol.h
+      ha:
+        meaning: cim:UnitSymbol.ha
+      HPerm:
+        meaning: cim:UnitSymbol.HPerm
+      Hz:
+        meaning: cim:UnitSymbol.Hz
+      HzPerHz:
+        meaning: cim:UnitSymbol.HzPerHz
+      HzPers:
+        meaning: cim:UnitSymbol.HzPers
+      J:
+        meaning: cim:UnitSymbol.J
+      JPerK:
+        meaning: cim:UnitSymbol.JPerK
+      JPerkg:
+        meaning: cim:UnitSymbol.JPerkg
+      JPerkgK:
+        meaning: cim:UnitSymbol.JPerkgK
+      JPerm2:
+        meaning: cim:UnitSymbol.JPerm2
+      JPerm3:
+        meaning: cim:UnitSymbol.JPerm3
+      JPermol:
+        meaning: cim:UnitSymbol.JPermol
+      JPermolK:
+        meaning: cim:UnitSymbol.JPermolK
+      JPers:
+        meaning: cim:UnitSymbol.JPers
+      K:
+        meaning: cim:UnitSymbol.K
+      kat:
+        meaning: cim:UnitSymbol.kat
+      katPerm3:
+        meaning: cim:UnitSymbol.katPerm3
+      kg:
+        meaning: cim:UnitSymbol.kg
+      kgm:
+        meaning: cim:UnitSymbol.kgm
+      kgm2:
+        meaning: cim:UnitSymbol.kgm2
+      kgPerJ:
+        meaning: cim:UnitSymbol.kgPerJ
+      kgPerm3:
+        meaning: cim:UnitSymbol.kgPerm3
+      kn:
+        meaning: cim:UnitSymbol.kn
+      KPers:
+        meaning: cim:UnitSymbol.KPers
+      l:
+        meaning: cim:UnitSymbol.l
+      lm:
+        meaning: cim:UnitSymbol.lm
+      lPerh:
+        meaning: cim:UnitSymbol.lPerh
+      lPerl:
+        meaning: cim:UnitSymbol.lPerl
+      lPers:
+        meaning: cim:UnitSymbol.lPers
+      lx:
+        meaning: cim:UnitSymbol.lx
+      m:
+        meaning: cim:UnitSymbol.m
+      M:
+        meaning: cim:UnitSymbol.M
+      m2:
+        meaning: cim:UnitSymbol.m2
+      m2Pers:
+        meaning: cim:UnitSymbol.m2Pers
+      m3:
+        meaning: cim:UnitSymbol.m3
+      m3Compensated:
+        meaning: cim:UnitSymbol.m3Compensated
+      m3Perh:
+        meaning: cim:UnitSymbol.m3Perh
+      m3Perkg:
+        meaning: cim:UnitSymbol.m3Perkg
+      m3Pers:
+        meaning: cim:UnitSymbol.m3Pers
+      m3Uncompensated:
+        meaning: cim:UnitSymbol.m3Uncompensated
+      min:
+        meaning: cim:UnitSymbol.min
+      mmHg:
+        meaning: cim:UnitSymbol.mmHg
+      mol:
+        meaning: cim:UnitSymbol.mol
+      molPerkg:
+        meaning: cim:UnitSymbol.molPerkg
+      molPerm3:
+        meaning: cim:UnitSymbol.molPerm3
+      molPermol:
+        meaning: cim:UnitSymbol.molPermol
+      mPerm3:
+        meaning: cim:UnitSymbol.mPerm3
+      mPers:
+        meaning: cim:UnitSymbol.mPers
+      mPers2:
+        meaning: cim:UnitSymbol.mPers2
+      Mx:
+        meaning: cim:UnitSymbol.Mx
+      N:
+        meaning: cim:UnitSymbol.N
+      Nm:
+        meaning: cim:UnitSymbol.Nm
+      none:
+        meaning: cim:UnitSymbol.none
+      NPerm:
+        meaning: cim:UnitSymbol.NPerm
+      Oe:
+        meaning: cim:UnitSymbol.Oe
+      ohm:
+        meaning: cim:UnitSymbol.ohm
+      ohmm:
+        meaning: cim:UnitSymbol.ohmm
+      ohmPerm:
+        meaning: cim:UnitSymbol.ohmPerm
+      onePerHz:
+        meaning: cim:UnitSymbol.onePerHz
+      onePerm:
+        meaning: cim:UnitSymbol.onePerm
+      Pa:
+        meaning: cim:UnitSymbol.Pa
+      PaPers:
+        meaning: cim:UnitSymbol.PaPers
+      Pas:
+        meaning: cim:UnitSymbol.Pas
+      ppm:
+        meaning: cim:UnitSymbol.ppm
+      Q:
+        meaning: cim:UnitSymbol.Q
+      Qh:
+        meaning: cim:UnitSymbol.Qh
+      rad:
+        meaning: cim:UnitSymbol.rad
+      radPers:
+        meaning: cim:UnitSymbol.radPers
+      radPers2:
+        meaning: cim:UnitSymbol.radPers2
+      rev:
+        meaning: cim:UnitSymbol.rev
+      rotPers:
+        meaning: cim:UnitSymbol.rotPers
+      s:
+        meaning: cim:UnitSymbol.s
+      S:
+        meaning: cim:UnitSymbol.S
+      SPerm:
+        meaning: cim:UnitSymbol.SPerm
+      sPers:
+        meaning: cim:UnitSymbol.sPers
+      sr:
+        meaning: cim:UnitSymbol.sr
+      Sv:
+        meaning: cim:UnitSymbol.Sv
+      T:
+        meaning: cim:UnitSymbol.T
+      therm:
+        meaning: cim:UnitSymbol.therm
+      tonne:
+        meaning: cim:UnitSymbol.tonne
+      V:
+        meaning: cim:UnitSymbol.V
+      V2:
+        meaning: cim:UnitSymbol.V2
+      V2h:
+        meaning: cim:UnitSymbol.V2h
+      VA:
+        meaning: cim:UnitSymbol.VA
+      VAh:
+        meaning: cim:UnitSymbol.VAh
+      VAr:
+        meaning: cim:UnitSymbol.VAr
+      VArh:
+        meaning: cim:UnitSymbol.VArh
+      Vh:
+        meaning: cim:UnitSymbol.Vh
+      VPerHz:
+        meaning: cim:UnitSymbol.VPerHz
+      VPerm:
+        meaning: cim:UnitSymbol.VPerm
+      VPerV:
+        meaning: cim:UnitSymbol.VPerV
+      VPerVA:
+        meaning: cim:UnitSymbol.VPerVA
+      VPerVAr:
+        meaning: cim:UnitSymbol.VPerVAr
+      Vs:
+        meaning: cim:UnitSymbol.Vs
+      W:
+        meaning: cim:UnitSymbol.W
+      Wb:
+        meaning: cim:UnitSymbol.Wb
+      Wh:
+        meaning: cim:UnitSymbol.Wh
+      WPerA:
+        meaning: cim:UnitSymbol.WPerA
+      WPerm2:
+        meaning: cim:UnitSymbol.WPerm2
+      WPerm2sr:
+        meaning: cim:UnitSymbol.WPerm2sr
+      WPermK:
+        meaning: cim:UnitSymbol.WPermK
+      WPers:
+        meaning: cim:UnitSymbol.WPers
+      WPersr:
+        meaning: cim:UnitSymbol.WPersr
+      WPerW:
+        meaning: cim:UnitSymbol.WPerW
+  PhaseCode:
+    description: "An unordered enumeration of phase identifiers.  Allows designation\
+      \ of phases for both transmission and distribution equipment, circuits and loads.\
+      \   The enumeration, by itself, does not describe how the phases are connected\
+      \ together or connected to ground.  Ground is not explicitly denoted as a phase.\r\
+      \nResidential and small commercial loads are often served from single-phase,\
+      \ or split-phase, secondary circuits. For the example of s12N, phases 1 and\
+      \ 2 refer to hot wires that are 180 degrees out of phase, while N refers to\
+      \ the neutral wire. Through single-phase transformer connections, these secondary\
+      \ circuits may be served from one or two of the primary phases A, B, and C.\
+      \ For three-phase loads, use the A, B, C phase codes instead of s12N.\r\nThe\
+      \ integer values are from IEC 61968-9 to support revenue metering applications."
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:PhaseCode
+    permissible_values:
+      A:
+        meaning: cim:PhaseCode.A
+      AB:
+        meaning: cim:PhaseCode.AB
+      ABC:
+        meaning: cim:PhaseCode.ABC
+      ABCN:
+        meaning: cim:PhaseCode.ABCN
+      ABN:
+        meaning: cim:PhaseCode.ABN
+      AC:
+        meaning: cim:PhaseCode.AC
+      ACN:
+        meaning: cim:PhaseCode.ACN
+      AN:
+        meaning: cim:PhaseCode.AN
+      B:
+        meaning: cim:PhaseCode.B
+      BC:
+        meaning: cim:PhaseCode.BC
+      BCN:
+        meaning: cim:PhaseCode.BCN
+      BN:
+        meaning: cim:PhaseCode.BN
+      C:
+        meaning: cim:PhaseCode.C
+      CN:
+        meaning: cim:PhaseCode.CN
+      N:
+        meaning: cim:PhaseCode.N
+      none:
+        meaning: cim:PhaseCode.none
+      s1:
+        meaning: cim:PhaseCode.s1
+      s12:
+        meaning: cim:PhaseCode.s12
+      s12N:
+        meaning: cim:PhaseCode.s12N
+      s1N:
+        meaning: cim:PhaseCode.s1N
+      s2:
+        meaning: cim:PhaseCode.s2
+      s2N:
+        meaning: cim:PhaseCode.s2N
+      X:
+        meaning: cim:PhaseCode.X
+      XN:
+        meaning: cim:PhaseCode.XN
+      XY:
+        meaning: cim:PhaseCode.XY
+      XYN:
+        meaning: cim:PhaseCode.XYN
+classes:
+  UsagePoint:
+    description: Logical or physical point in the network to which readings or events
+      may be attributed. Used at the place where a physical or virtual meter may be
+      located; however, it is not required that a meter be present.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Metering
+    is_a: IdentifiedObject
+    attributes:
+      ami_billing_ready:
+        description: "Tracks the lifecycle of the metering installation at a usage\
+          \ point with respect to readiness for billing via advanced metering infrastructure\
+          \ reads.\r\n"
+        slot_uri: cim:UsagePoint.amiBillingReady
+        multivalued: false
+        range: AmiBillingReadyKind
+        required: false
+      check_billing:
+        description: True if as a result of an inspection or otherwise, there is a
+          reason to suspect that a previous billing may have been performed with erroneous
+          data. Value should be reset once this potential discrepancy has been resolved.
+        slot_uri: cim:UsagePoint.checkBilling
+        multivalued: false
+        range: boolean
+        required: false
+      connection_category:
+        description: A code used to specify the connection category, e.g., low voltage
+          or low pressure, where the usage point is defined.
+        slot_uri: cim:UsagePoint.connectionCategory
+        multivalued: false
+        range: string
+        required: false
+      connection_state:
+        description: "State of the usage point with respect to connection to the network.\r\
+          \n"
+        slot_uri: cim:UsagePoint.connectionState
+        multivalued: false
+        range: UsagePointConnectedKind
+        required: false
+      disconnection_method:
+        description: Is an indication of how the usage point is physically connected
+          or disconnected.
+        slot_uri: cim:UsagePoint.disconnectionMethod
+        multivalued: false
+        range: string
+        required: false
+      estimated_load:
+        description: Estimated load.
+        slot_uri: cim:UsagePoint.estimatedLoad
+        multivalued: false
+        range: CurrentFlow
+        required: false
+      grounded:
+        description: True if grounded.
+        slot_uri: cim:UsagePoint.grounded
+        multivalued: false
+        range: boolean
+        required: false
+      is_sdp:
+        description: "If true, this usage point is a service delivery point, i.e.,\
+          \ a usage point where the ownership of the service changes hands.\r\n"
+        slot_uri: cim:UsagePoint.isSdp
+        multivalued: false
+        range: boolean
+        required: false
+      is_virtual:
+        description: If true, this usage point is virtual, i.e., no physical location
+          exists in the network where a meter could be located to collect the meter
+          readings. For example, one may define a virtual usage point to serve as
+          an aggregation of usage for all of a company's premises distributed widely
+          across the distribution territory. Otherwise, the usage point is physical,
+          i.e., there is a logical point in the network where a meter could be located
+          to collect meter readings.
+        slot_uri: cim:UsagePoint.isVirtual
+        multivalued: false
+        range: boolean
+        required: false
+      minimal_usage_expected:
+        description: If true, minimal or zero usage is expected at this usage point
+          for situations such as premises vacancy, logical or physical disconnect.
+          It is used for readings validation and estimation.
+        slot_uri: cim:UsagePoint.minimalUsageExpected
+        multivalued: false
+        range: boolean
+        required: false
+      nominal_service_voltage:
+        description: "Nominal service voltage.\r\n"
+        slot_uri: cim:UsagePoint.nominalServiceVoltage
+        multivalued: false
+        range: Voltage
+        required: false
+      outage_region:
+        description: "Outage region in which this usage point is located.\r\n"
+        slot_uri: cim:UsagePoint.outageRegion
+        multivalued: false
+        range: string
+        required: false
+      phase_code:
+        description: "Phase code. Number of wires and specific nominal phases can\
+          \ be deduced from enumeration literal values. For example, ABCN is three-phase,\
+          \ four-wire, s12n (splitSecondary12N) is single-phase, three-wire, and s1n\
+          \ and s2n are single-phase, two-wire.\r\n"
+        slot_uri: cim:UsagePoint.phaseCode
+        multivalued: false
+        range: PhaseCode
+        required: false
+      phase_count:
+        description: "Number of potential phases the Usage Point supports, typically\
+          \ 0, 1 or 3.\r\n"
+        slot_uri: cim:UsagePoint.phaseCount
+        multivalued: false
+        range: integer
+        required: false
+      rated_current:
+        description: "Current flow that this usage point is configured to deliver.\r\
+          \n"
+        slot_uri: cim:UsagePoint.ratedCurrent
+        multivalued: false
+        range: CurrentFlow
+        required: false
+      rated_power:
+        description: "Active power that this usage point is configured to deliver.\r\
+          \n"
+        slot_uri: cim:UsagePoint.ratedPower
+        multivalued: false
+        range: ActivePower
+        required: false
+      read_cycle:
+        description: "Cycle day on which the meter for this usage point will normally\
+          \ be read.  Usually correlated with the billing cycle.\r\n"
+        slot_uri: cim:UsagePoint.readCycle
+        multivalued: false
+        range: string
+        required: false
+      read_route:
+        description: "Identifier of the route to which this usage point is assigned\
+          \ for purposes of meter reading. Typically used to configure hand held meter\
+          \ reading systems prior to collection of reads.\r\n"
+        slot_uri: cim:UsagePoint.readRoute
+        multivalued: false
+        range: string
+        required: false
+      service_delivery_remark:
+        description: "Remarks about this usage point, for example the reason for it\
+          \ being rated with a non-nominal priority.\r\n"
+        slot_uri: cim:UsagePoint.serviceDeliveryRemark
+        multivalued: false
+        range: string
+        required: false
+      service_priority:
+        description: "Priority of service for this usage point. Note that usage points\
+          \ at the same service location can have different priorities.\r\n"
+        slot_uri: cim:UsagePoint.servicePriority
+        multivalued: false
+        range: string
+        required: false
+      equipments:
+        description: All equipment connecting this usage point to the electrical grid.
+        slot_uri: cim:UsagePoint.Equipments
+        multivalued: true
+        range: Equipment
+        required: false
+    class_uri: cim:UsagePoint
+  CurrentFlow:
+    annotations:
+      represents_cim_data_type:
+        tag: represents_cim_data_type
+        value: true
+    description: 'Electrical current with sign convention: positive flow is out of
+      the conducting equipment into the connectivity node. Can be both AC and DC.'
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Domain
+    attributes:
+      multiplier:
+        slot_uri: cim:CurrentFlow.multiplier
+        multivalued: false
+        range: UnitMultiplier
+        required: false
+      unit:
+        slot_uri: cim:CurrentFlow.unit
+        multivalued: false
+        range: UnitSymbol
+        required: false
+      value:
+        slot_uri: cim:CurrentFlow.value
+        multivalued: false
+        range: float
+        required: false
+    class_uri: cim:CurrentFlow
+  Voltage:
+    annotations:
+      represents_cim_data_type:
+        tag: represents_cim_data_type
+        value: true
+    description: Electrical voltage, can be both AC and DC.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Domain
+    attributes:
+      multiplier:
+        slot_uri: cim:Voltage.multiplier
+        multivalued: false
+        range: UnitMultiplier
+        required: false
+      unit:
+        slot_uri: cim:Voltage.unit
+        multivalued: false
+        range: UnitSymbol
+        required: false
+      value:
+        slot_uri: cim:Voltage.value
+        multivalued: false
+        range: float
+        required: false
+    class_uri: cim:Voltage
+  ActivePower:
+    annotations:
+      represents_cim_data_type:
+        tag: represents_cim_data_type
+        value: true
+    description: Product of RMS value of the voltage and the RMS value of the in-phase
+      component of the current.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Domain
+    attributes:
+      multiplier:
+        slot_uri: cim:ActivePower.multiplier
+        multivalued: false
+        range: UnitMultiplier
+        required: false
+      unit:
+        slot_uri: cim:ActivePower.unit
+        multivalued: false
+        range: UnitSymbol
+        required: false
+      value:
+        slot_uri: cim:ActivePower.value
+        multivalued: false
+        range: float
+        required: false
+    class_uri: cim:ActivePower
+  Equipment:
+    description: The parts of a power system that are physical devices, electronic
+      or mechanical.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    is_a: PowerSystemResource
+    attributes:
+      aggregate:
+        description: "The aggregate flag provides an alternative way of representing\
+          \ an aggregated (equivalent) element. It is applicable in cases when the\
+          \ dedicated classes for equivalent equipment do not have all of the attributes\
+          \ necessary to represent the required level of detail.  In case the flag\
+          \ is set to \u201Ctrue\u201D the single instance of equipment represents\
+          \ multiple pieces of equipment that have been modelled together as an aggregate\
+          \ equivalent obtained by a network reduction procedure. Examples would be\
+          \ power transformers or synchronous machines operating in parallel modelled\
+          \ as a single aggregate power transformer or aggregate synchronous machine.\
+          \  \r\nThe attribute is not used for EquivalentBranch, EquivalentShunt and\
+          \ EquivalentInjection."
+        slot_uri: cim:Equipment.aggregate
+        multivalued: false
+        range: boolean
+        required: false
+      in_service:
+        description: Specifies the availability of the equipment. True means the equipment
+          is available for topology processing, which determines if the equipment
+          is energized or not. False means that the equipment is treated by network
+          applications as if it is not in the model.
+        slot_uri: cim:Equipment.inService
+        multivalued: false
+        range: boolean
+        required: false
+      network_analysis_enabled:
+        description: The equipment is enabled to participate in network analysis.  If
+          unspecified, the value is assumed to be true.
+        slot_uri: cim:Equipment.networkAnalysisEnabled
+        multivalued: false
+        range: boolean
+        required: false
+      normally_in_service:
+        description: Specifies the availability of the equipment under normal operating
+          conditions. True means the equipment is available for topology processing,
+          which determines if the equipment is energized or not. False means that
+          the equipment is treated by network applications as if it is not in the
+          model.
+        slot_uri: cim:Equipment.normallyInService
+        multivalued: false
+        range: boolean
+        required: false
+      usage_points:
+        description: All usage points connected to the electrical grid through this
+          equipment.
+        slot_uri: cim:Equipment.UsagePoints
+        multivalued: true
+        range: UsagePoint
+        required: false
+    class_uri: cim:Equipment
+  IdentifiedObject:
+    description: This is a root class to provide common identification for all classes
+      needing identification and naming attributes.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    attributes:
+      description:
+        description: The description is a free human readable text describing or naming
+          the object. It may be non unique and may not correlate to a naming hierarchy.
+        slot_uri: cim:IdentifiedObject.description
+        multivalued: false
+        range: string
+        required: false
+      m_rid:
+        description: "Master resource identifier issued by a model authority. The\
+          \ mRID is unique within an exchange context. Global uniqueness is easily\
+          \ achieved by using a UUID, as specified in RFC 4122, for the mRID. The\
+          \ use of UUID is strongly recommended.\r\nFor CIMXML data files in RDF syntax\
+          \ conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about\
+          \ attributes that identify CIM object elements."
+        slot_uri: cim:IdentifiedObject.mRID
+        multivalued: false
+        range: string
+        required: false
+      energy_ident_code_eic:
+        description: The attribute is used for an exchange of the EIC code (Energy
+          identification Code). The length of the string is 16 characters as defined
+          by the EIC code. For details on EIC scheme please refer to ENTSO-E web site.
+        slot_uri: eu:IdentifiedObject.energyIdentCodeEic
+        multivalued: false
+        range: string
+        required: false
+      names:
+        description: All names of this identified object.
+        slot_uri: cim:IdentifiedObject.Names
+        multivalued: true
+        range: Name
+        required: false
+    class_uri: cim:IdentifiedObject
+  PowerSystemResource:
+    description: A power system resource (PSR) can be an item of equipment such as
+      a switch, an equipment container containing many individual items of equipment
+      such as a substation, or an organisational entity such as sub-control area.
+      Power system resources can have measurements associated.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    is_a: IdentifiedObject
+    class_uri: cim:PowerSystemResource
+  Name:
+    description: "The Name class provides the means to define any number of human\
+      \ readable  names for an object. A name is <b>not</b> to be used for defining\
+      \ inter-object relationships. For inter-object relationships instead use the\
+      \ object identification 'mRID'.\r\n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    attributes:
+      name_type:
+        description: Type of this name.
+        slot_uri: cim:Name.NameType
+        multivalued: false
+        range: NameType
+        required: true
+      identified_object:
+        description: Identified object that this name designates.
+        slot_uri: cim:Name.IdentifiedObject
+        multivalued: false
+        range: IdentifiedObject
+        required: true
+    class_uri: cim:Name
+  NameType:
+    description: "Type of name. Possible values for attribute 'name' are implementation\
+      \ dependent but standard profiles may specify types. An enterprise may have\
+      \ multiple IT systems each having its own local name for the same object, e.g.\
+      \ a planning system may have different names from an EMS. An object may also\
+      \ have different names within the same IT system, e.g. localName as defined\
+      \ in CIM version 14. The definition from CIM14 is:\r\nThe localName is a human\
+      \ readable name of the object. It is a free text name local to a node in a naming\
+      \ hierarchy similar to a file directory structure. A power system related naming\
+      \ hierarchy may be: Substation, VoltageLevel, Equipment etc. Children of the\
+      \ same parent in such a hierarchy have names that typically are unique among\
+      \ them.\r\n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    attributes:
+      description:
+        description: "Description of the name type.\r\n"
+        slot_uri: cim:NameType.description
+        multivalued: false
+        range: string
+        required: false
+      name_type_authority:
+        description: Authority responsible for managing names of this type.
+        slot_uri: cim:NameType.NameTypeAuthority
+        multivalued: false
+        range: NameTypeAuthority
+        required: false
+      names:
+        description: All names of this type.
+        slot_uri: cim:NameType.Names
+        multivalued: true
+        range: Name
+        required: false
+    class_uri: cim:NameType
+  NameTypeAuthority:
+    description: "Authority responsible for creation and management of names of a\
+      \ given type; typically an organization or an enterprise system.\r\n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    attributes:
+      description:
+        description: "Description of the name type authority.\r\n"
+        slot_uri: cim:NameTypeAuthority.description
+        multivalued: false
+        range: string
+        required: false
+      name_types:
+        description: All name types managed by this authority.
+        slot_uri: cim:NameTypeAuthority.NameTypes
+        multivalued: true
+        range: NameType
+        required: false
+    class_uri: cim:NameTypeAuthority
+
