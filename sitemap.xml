@@ -6,12 +6,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/ActivePower/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/AmiBillingReadyKind/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://Netbeheer-Nederland.github.io/im-e-metering/Boolean/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://Netbeheer-Nederland.github.io/im-e-metering/Curie/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/CurrentFlow/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -41,17 +56,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/Equipment/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://Netbeheer-Nederland.github.io/im-e-metering/Float/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://Netbeheer-Nederland.github.io/im-e-metering/IdentifiedObject/</loc>
-         <lastmod>2024-07-02</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/IdentifiedObjectCollection/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -71,7 +86,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/NamedThing/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/MeteringProfile/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/Name/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/NameType/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/NameTypeAuthority/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -91,7 +121,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/PersonStatus/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/PhaseCode/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/PowerSystemResource/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -111,6 +146,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/UnitMultiplier/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/UnitSymbol/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://Netbeheer-Nederland.github.io/im-e-metering/Uri/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
@@ -121,17 +166,47 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/UsagePoint/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/UsagePointConnectedKind/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/Voltage/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://Netbeheer-Nederland.github.io/im-e-metering/about/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/age_in_years/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/aggregate/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/birth_date/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/ami_billing_ready/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/check_billing/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/connection_category/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/connection_state/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -141,32 +216,157 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/entries/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/disconnection_method/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/id/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/energy_ident_code_eic/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/im-e-metering/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/equipments/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/name/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/estimated_load/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/primary_email/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/grounded/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/vital_status/</loc>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/identified_object/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/in_service/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/is_sdp/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/is_virtual/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/m_rid/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/minimal_usage_expected/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/multiplier/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/name_type/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/name_type_authority/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/name_types/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/names/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/network_analysis_enabled/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/nominal_service_voltage/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/normally_in_service/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/outage_region/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/phase_code/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/phase_count/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/rated_current/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/rated_power/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/read_cycle/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/read_route/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/service_delivery_remark/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/service_priority/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/unit/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/usage_points/</loc>
+         <lastmod>2024-07-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://Netbeheer-Nederland.github.io/im-e-metering/value/</loc>
          <lastmod>2024-07-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
