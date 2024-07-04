@@ -1,7 +1,46 @@
 name: MeteringProfile
 title: Metering Vocabulary
 id: http://data.netbeheernederland.nl/im-e-metering/version#1.0.0
-description: This vocabulary describes the metering profile from NBNLES.
+description: |-
+  This vocabulary describes the metering profile from NBNLES.
+
+  ```mermaid
+  classDiagram
+  direction RL
+
+  class UsagePoint {
+      string connection_category
+      UsagePointConnectedKind connection_state
+      string disconnection_method
+      CurrentFlow estimated_load
+      boolean grounded
+      boolean is_sdp
+      boolean is_virtual
+      Voltage nominal_service_voltage
+      CurrentFlow rated_current
+      ActivePower rated_power
+      Equipment equipments
+      string description
+      string m_rid
+      string energy_ident_code_eic
+      string european_article_number_ean
+      Name names
+  }
+  class Equipment {
+      boolean aggregate
+      boolean in_service
+      boolean network_analysis_enabled
+      boolean normally_in_service
+      UsagePoint usage_points
+      string description
+      string m_rid
+      string energy_ident_code_eic
+      string european_article_number_ean
+      Name names
+  }
+
+  UsagePoint --> Equipment : equipments
+  ```
 imports:
 - linkml:types
 prefixes:
